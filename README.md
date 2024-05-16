@@ -18,7 +18,7 @@ Tables needed for this Database:
 - Lecturers
 - Libraries
 
-### Creating the tables (You can find the codes [here[())
+### Creating the tables (You can find the codes [here](https://github.com/Teekafey/DATABASE-CREATION-AND-MODELLING/blob/main/Student_db.sql))
 - Identified relevant data elements.
 - Implemented data normalization techniques to minimize redundancy and ensure data accuracy.
 - Established appropriate relationships between tables using primary and foreign keys, enabling efficient data retrieval.
