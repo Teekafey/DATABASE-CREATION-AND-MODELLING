@@ -6,13 +6,13 @@
 
 I will be using **Oracle SQL Developer** for this project,
 
-## Student Information Management System
+## Student Information and Course Registration Management System
 I want to create a student database for an Educational Institute.  Currently, student information might be scattered across various sources, making it difficult to manage, access, and retrieve specific data efficiently. This can lead to delays, errors, and inefficiencies in processes like student registration, course enrollment and allocation, library registration, etc.
 
 Tables needed for this Database:
 - Students
 - Courses
-- Course enrollments
+- Course offerings
 - Program type
 - Address
 - Lecturers
