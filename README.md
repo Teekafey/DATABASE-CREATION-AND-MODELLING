@@ -24,4 +24,5 @@ Tables needed for this Database:
 - Established appropriate relationships between tables using primary and foreign keys, enabling efficient data retrieval.
 - Selected appropriate data types for each attribute (e.g., text for names, numbers for student IDs) to ensure data integrity.
 
-![Treasure first model](https://github.com/Teekafey/DATABASE-CREATION-AND-MODELLING/assets/169501567/f67b56a0-cd75-4d78-ac5e-7370ea936f9a)
+![Screenshot 2024-05-22 182949](https://github.com/Teekafey/DATABASE-CREATION-AND-MODELLING/assets/169501567/00ae1371-14c6-4dac-8053-10f8d1578f05)
+![Student_Info_Course_Reg](https://github.com/Teekafey/DATABASE-CREATION-AND-MODELLING/assets/169501567/3786341c-26d0-4384-a023-0b71225e12e7)
