@@ -1,72 +1,79 @@
--- Creating Program_type Table
-/* this table was created first because it has a relation to 
+-- Creating Program_type and Address Table
+/* 
+These tables were created first because it has a relation to 
 the students table which we we would see next
 */
-CREATE TABLE program_type (
-   program_type_id VARCHAR2(10) PRIMARY KEY,
-   program_name VARCHAR2(10),
-   program_length_years NUMBER CHECK (program_length_years IN (2,4))
-);
-
--- Creating the Students Table
-CREATE TABLE students (
-  student_id NUMBER(5)PRIMARY KEY,
-  first_name VARCHAR2(100) NOT NULL,
-  last_name VARCHAR2(100) NOT NULL,
-  email VARCHAR2(255) UNIQUE, 
-  birth_date DATE, 
-  library_card_id NUMBER(4),
-  address_id NUMBER,
-  program_type_id VARCHAR2(10)REFERENCES program_type(program_type_id)
-);
-
---Creating the Lecturers Table
-CREATE TABLE lecturers (
-  lecturer_id NUMBER(5)PRIMARY KEY,
-  first_name VARCHAR2(100) NOT NULL,
-  last_name VARCHAR2(100) NOT NULL,
-  email VARCHAR2(255) UNIQUE
-);
-
---Creating the Courses Table
-CREATE TABLE courses (
-  course_id VARCHAR2(10) PRIMARY KEY,
-  course_name VARCHAR2(200)
-);
-
--- Creating the Course_offerings Table
-CREATE TABLE course_offerings (
-  course_id VARCHAR2(10) REFERENCES courses(course_id),
-  student_id NUMBER(5) REFERENCES students(student_id),
-  lecturer_id NUMBER(5) REFERENCES lecturers(lecturer_id),
-  semester VARCHAR2(10),
-  year NUMBER(4),
-  enrollment_date DATE NOT NULL,
-  PRIMARY KEY (course_id, semester, year)
+CREATE TABLE Program_Type (
+  Program_Type_ID NUMBER PRIMARY KEY,
+  Program_Name VARCHAR2(100) NOT NULL,
+  Description VARCHAR2(200)
 );
 
 --Creating the Address Table
-CREATE TABLE address (
-  address_id NUMBER PRIMARY KEY,
-  student_id NUMBER(5),
-  street_name VARCHAR(250),
-  zip_code NUMBER(6),
-  city VARCHAR2(100),
-CONSTRAINT addr_stud_fk FOREIGN KEY (student_id) 
-REFERENCES students(student_id)
+CREATE TABLE Address (
+  Address_ID NUMBER PRIMARY KEY,
+  Street_Address VARCHAR2(100),
+  City VARCHAR2(50) NOT NULL,
+  State_Province VARCHAR2(50) NOT NULL,
+  Postal_Code VARCHAR2(20),
+  Country VARCHAR2(50) NOT NULL
 );
- 
--- Creating the Libraries Table
-CREATE TABLE libraries (
-   library_card_id NUMBER(4)PRIMARY KEY,
-   library_name VARCHAR2(3),
-   library_wing VARCHAR2(10)
-); 
 
--- Altering the Students Table to add a constraint that links the library_card_id to the library table
-ALTER TABLE students
-ADD CONSTRAINT stu_lib_fk FOREIGN KEY (library_card_id) REFERENCES libraries(library_card_id);
- 
+-- Creating the Students Table
+CREATE TABLE Students (
+  Student_ID NUMBER PRIMARY KEY,
+  First_Name VARCHAR2(50) NOT NULL,
+  Last_Name VARCHAR2(50) NOT NULL,
+  Email_Address VARCHAR2(100) UNIQUE NOT NULL,
+  Phone_Number VARCHAR2(20),
+  Address_ID NUMBER REFERENCES Address(Address_ID),
+  Program_Type_ID NUMBER REFERENCES Program_Type(Program_Type_ID)
+);
+
+--Creating the Lecturers Table
+CREATE TABLE Lecturers (
+  Lecturer_ID NUMBER PRIMARY KEY,
+  First_Name VARCHAR2(50) NOT NULL,
+  Last_Name VARCHAR2(50) NOT NULL,
+  Email_Address VARCHAR2(100) UNIQUE NOT NULL,
+  Department VARCHAR2(50)
+);
+
+--Creating the Courses Table
+CREATE TABLE Courses (
+  Course_ID NUMBER PRIMARY KEY,
+  Course_Name VARCHAR2(100) NOT NULL,
+  Description VARCHAR2(200),
+  Credits NUMBER
+);
+
+-- Creating the Course_offerings Table
+CREATE TABLE Course_Offerings (
+  Course_Offering_ID NUMBER PRIMARY KEY,
+  Course_ID NUMBER REFERENCES Courses(Course_ID),
+  Semester VARCHAR2(20) NOT NULL,
+  Year NUMBER NOT NULL,
+  Lecturer_ID NUMBER REFERENCES Lecturers(Lecturer_ID),
+  Library_ID NUMBER REFERENCES Libraries(Library_ID)
+);
+
+-- Creating the Libraries Table
+CREATE TABLE Libraries (
+  Library_ID NUMBER PRIMARY KEY,
+  Library_Name VARCHAR2(100) NOT NULL,
+  Library_Wing VARCHAR2(100)
+);
+
+/*
+Creating the Regristration Table
+The associative table between Students and Course Offerings (to have a many-many-relationship)
+*/
+CREATE TABLE Registration (
+  Registration_ID NUMBER PRIMARY KEY,
+  Student_ID NUMBER REFERENCES Students(Student_ID),
+  Course_Offering_ID NUMBER REFERENCES Course_Offerings(Course_Offering_ID),
+  Registration_Date DATE
+);
  
  
  
